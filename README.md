@@ -5,7 +5,7 @@
 ## 🚀 Live Demo
 ##🔗:https://expense-tracker-neon-zeta-67.vercel.app
 
-![PayTe Dashboard](https://expense-tracker-one-beryl-11.vercel.app/assets/logo.png)
+![Uploading image.png…]()
 *(Note: Replace with a screenshot of the dashboard if available)*
 
 ---
@@ -65,5 +65,6 @@ This project is licensed under the MIT License.
 
 ---
 *Created by Vinay*
+
 
 
