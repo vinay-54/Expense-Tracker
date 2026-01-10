@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Smart Expense Tracker</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="auth-container fade-in">
+        <div class="auth-card slide-up">
+            <div class="brand-logo">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+            <h1>Create Account</h1>
+            <p class="subtitle">Start tracking your expenses today.</p>
+
+            <form id="signupForm" class="auth-form">
+                <div class="row">
+                    <div class="form-group half">
+                        <label for="firstName">First Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="firstName" required placeholder="John">
+                        </div>
+                    </div>
+                    <div class="form-group half">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="lastName" required placeholder="Doe">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" required placeholder="john@example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" required placeholder="Create a password">
+                        <button type="button" class="toggle-password"><i class="fa-regular fa-eye"></i></button>
+                    </div>
+                    <div class="strength-meter">
+                        <div class="strength-bar"></div>
+                        <span class="strength-text">Weak</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmPassword" required placeholder="Confirm password">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/auth.js"></script>
+</body>
+
+</html>

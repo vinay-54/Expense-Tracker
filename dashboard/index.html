@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Expense Tracker</title>
+    <link rel="icon" href="../assets/logo.png" type="image/png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container fade-in">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-wallet"></i>
+                <span>PayTe</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active" data-target="view-dashboard"><i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span></a>
+                <a href="#" class="nav-link" data-target="view-analytics"><i class="fa-solid fa-chart-pie"></i>
+                    <span>Analytics</span></a>
+                <a href="#" class="nav-link" data-target="view-wallet"><i class="fa-solid fa-wallet"></i>
+                    <span>Wallet</span></a>
+                <a href="#" class="nav-link" data-target="view-settings"><i class="fa-solid fa-gear"></i>
+                    <span>Settings</span></a>
+            </nav>
+            <div class="logout-wrapper">
+                <a href="#" id="logoutBtn" class="nav-link logout"><i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar">
+                <div class="user-welcome">
+                    <h2 id="welcomeMsg">Hello, User</h2>
+                    <p>Here's what's happening today.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <div class="profile-pic">
+                        <img src="https://ui-avatars.com/api/?name=User&background=111827&color=fff" alt="Profile"
+                            id="profileImg">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Views Container -->
+            <div id="view-dashboard" class="view-section active">
+                <div class="dashboard-grid">
+                    <!-- Summary Cards Section -->
+                    <div class="summary-section">
+                        <!-- Total Balance Card (Black) -->
+                        <div class="card balance-card">
+                            <div class="card-header">
+                                <span>Total Balance</span>
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                            </div>
+                            <h1 id="totalBalance">$0.00</h1>
+                            <div class="card-footer">
+                                <span>**** **** **** 4291</span>
+                                <span class="chip">Active</span>
+                            </div>
+                            <div class="decorative-circle"></div>
+                        </div>
+
+                        <!-- Mini Summary Cards -->
+                        <div class="mini-cards">
+                            <div class="card mini-card">
+                                <div class="icon-box income"><i class="fa-solid fa-arrow-down"></i></div>
+                                <div>
+                                    <span class="label">Income</span>
+                                    <h3 id="totalIncome">$0.00</h3>
+                                </div>
+                            </div>
+                            <div class="card mini-card">
+                                <div class="icon-box expense"><i class="fa-solid fa-arrow-up"></i></div>
+                                <div>
+                                    <span class="label">Expense</span>
+                                    <h3 id="totalExpense">$0.00</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Section -->
+                    <div class="chart-section">
+                        <div class="card chart-card">
+                            <div class="card-header-clean">
+                                <h3>Analytics</h3>
+
+                                <!-- Custom Dropdown Component -->
+                                <div class="custom-select-container" id="chartFilterDropdown">
+                                    <div class="custom-select-trigger">
+                                        <span class="selected-text">This Week</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="custom-options">
+                                        <div class="custom-option selected" data-value="week">This Week</div>
+                                        <div class="custom-option" data-value="month">This Month</div>
+                                    </div>
+                                    <!-- Hidden Input for Logic -->
+                                    <input type="hidden" id="chartFilter" value="week">
+                                </div>
+
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="expenseChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <div class="transactions-section">
+                        <div class="card transaction-card">
+                            <div class="card-header-clean">
+                                <h3>Recent Transactions</h3>
+                                <button class="btn-text" id="viewAllBtn">View All</button>
+                            </div>
+                            <ul class="transaction-list" id="transactionList">
+                                <!-- Items injected by JS -->
+                                <li class="empty-state">No transactions yet.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Category Pie Chart -->
+                    <div class="category-section">
+                        <div class="card chart-card">
+                            <div class="card-header-clean">
+                                <h3>Spend by Category</h3>
+                            </div>
+                            <div class="chart-container pie-container">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Add Button -->
+                <button class="fab-btn" id="addTxBtn">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div><!-- End Dashboard View -->
+
+            <!-- Analytics View -->
+            <div id="view-analytics" class="view-section">
+                <div class="card" style="margin-bottom: 2rem; padding: 1.5rem;">
+                    <h3>Overview</h3>
+                    <p style="color: var(--color-text-muted);">Financial performance this month.</p>
+                </div>
+                <div class="analytics-grid">
+                    <div class="card chart-card">
+                        <div class="card-header-clean">
+                            <h3>Income vs Expense</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="analyticsBarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card chart-card">
+                        <div class="card-header-clean">
+                            <h3>Weekly Trend</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="analyticsLineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wallet View -->
+            <div id="view-wallet" class="view-section">
+                <div class="wallet-grid">
+                    <!-- Left: Cards -->
+                    <div>
+                        <div class="bank-card">
+                            <div class="card-top">
+                                <span class="chip-icon"></span>
+                                <span class="wifi-icon"><i class="fa-solid fa-wifi"></i></span>
+                            </div>
+                            <div class="card-number">**** **** **** 4291</div>
+                            <div class="card-bottom">
+                                <div class="card-name">VINAY USER</div>
+                                <div class="card-expiry">12/28</div>
+                            </div>
+                            <!-- Watermark/Logo -->
+                            <div
+                                style="position: absolute; bottom: 1.5rem; right: 1.5rem; font-size: 2rem; opacity: 0.8;">
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                            </div>
+                        </div>
+                        <div class="wallet-actions" style="margin-top: 1.5rem;">
+                            <button class="action-btn"><i class="fa-solid fa-plus"></i> Add New Card</button>
+                            <button class="action-btn"><i class="fa-solid fa-paper-plane"></i> Quick Transfer</button>
+                        </div>
+                    </div>
+
+                    <!-- Right: History -->
+                    <div class="card" style="height: 100%;">
+                        <div class="card-header-clean">
+                            <h3>Wallet Activity</h3>
+                        </div>
+                        <ul class="transaction-list">
+                            <li class="transaction-item">
+                                <div class="tx-details">
+                                    <h4>Top Up</h4><span>From Bank •••• 8821</span>
+                                </div>
+                                <div class="tx-amount income">+$500.00</div>
+                            </li>
+                            <li class="transaction-item">
+                                <div class="tx-details">
+                                    <h4>Transfer</h4><span>To Savvy Account</span>
+                                </div>
+                                <div class="tx-amount expense">-$150.00</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="view-settings" class="view-section">
+                <form id="settingsForm" style="max-width: 800px;">
+                    <div class="settings-group">
+                        <h4>Profile Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="settingsName" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="settingsEmail" placeholder="name@example.com" readonly
+                                    style="background: #F9FAFB;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4>Preferences</h4>
+                        <label class="toggle-row" style="margin-bottom: 1rem;">
+                            <span>Enable Dark Mode</span>
+                            <div>
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                        <label class="toggle-row">
+                            <span>Email Notifications</span>
+                            <div>
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal destyle" id="transactionModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content slide-up">
+            <div class="modal-header">
+                <h3>Add Transaction</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label>Type</label>
+                    <div class="type-selector">
+                        <label class="radio-box">
+                            <input type="radio" name="type" value="expense" checked>
+                            <span class="radio-tile expense-tile">Expense</span>
+                        </label>
+                        <label class="radio-box">
+                            <input type="radio" name="type" value="income">
+                            <span class="radio-tile income-tile">Income</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="amount" required placeholder="0.00" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+
+                    <!-- Custom Category Dropdown -->
+                    <div class="custom-select-container" id="categoryDropdown" style="width: 100%;">
+                        <div class="custom-select-trigger">
+                            <span class="selected-text">Food & Dining</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="custom-options">
+                            <div class="custom-option selected" data-value="Food">
+                                <span><i class="fa-solid fa-utensils"></i> Food & Dining</span>
+                            </div>
+                            <div class="custom-option" data-value="Shopping">
+                                <span><i class="fa-solid fa-bag-shopping"></i> Shopping</span>
+                            </div>
+                            <div class="custom-option" data-value="Transport">
+                                <span><i class="fa-solid fa-car"></i> Transport</span>
+                            </div>
+                            <div class="custom-option" data-value="Bills">
+                                <span><i class="fa-solid fa-file-invoice-dollar"></i> Bills & Utilities</span>
+                            </div>
+                            <div class="custom-option" data-value="Entertainment">
+                                <span><i class="fa-solid fa-film"></i> Entertainment</span>
+                            </div>
+                            <div class="custom-option" data-value="Other">
+                                <span><i class="fa-solid fa-circle-question"></i> Other</span>
+                            </div>
+
+                            <!-- Income Specific Options (Hidden by default or toggled via JS) -->
+                            <div class="custom-option hidden-option" data-value="Salary">
+                                <span><i class="fa-solid fa-money-bill-wave"></i> Salary</span>
+                            </div>
+                            <div class="custom-option hidden-option" data-value="Business">
+                                <span><i class="fa-solid fa-briefcase"></i> Business</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="category" value="Food">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Note (Optional)</label>
+                    <input type="text" id="note" placeholder="What was this for?">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">All Set</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/charts.js"></script>
+</body>
+
+</html>

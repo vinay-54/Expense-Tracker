@@ -1,0 +1,155 @@
+/* 
+   Smart Expense Tracker - Global Styles 
+   Theme: Monochrome / Premium Black
+*/
+
+:root {
+    /* Color Palette - Monochrome Premium */
+    --color-primary: #111827;
+    /* Deep Black/Gray */
+    --color-primary-light: #374151;
+    /* Lighter Gray for hover */
+    --color-accent: #000000;
+    /* Pure Black for emphasis */
+
+    --color-bg: #F3F4F6;
+    /* Light Gray Background */
+    --color-surface: #FFFFFF;
+    /* White Cards */
+
+    --color-text-main: #1F2937;
+    /* Dark Charcoal */
+    --color-text-muted: #6B7280;
+    /* Muted Gray */
+    --color-danger: #EF4444;
+    /* Red for errors/expenses */
+    --color-success: #10B981;
+    /* Green for income (kept subtle) */
+
+    /* Typography */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Shadows & Elevation (Soft & Smooth) */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    --color-bg: #0f1115;
+    /* Very Dark Blue/Black */
+    --color-surface: #181b21;
+    /* Dark Gray for cards */
+
+    --color-primary: #F9FAFB;
+    /* Light text for primary in dark mode */
+    --color-primary-light: #E5E7EB;
+
+    --color-text-main: #F3F4F6;
+    --color-text-muted: #9CA3AF;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+    /* Keep accents */
+    --color-accent: #FFFFFF;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Utility Classes for Animations */
+.fade-in {
+    animation: fadeIn var(--transition-normal) forwards;
+    opacity: 0;
+}
+
+.slide-up {
+    animation: slideUp var(--transition-normal) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth Form Elements */
+input,
+button,
+select {
+    font-family: inherit;
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+/* Button Base */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-light);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+/* Card Base */
+.card {
+    background: var(--color-surface);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    /* Subtle lift */
+}

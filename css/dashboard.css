@@ -1,0 +1,929 @@
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--color-bg);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #E5E7EB;
+    /* Flex Layout - Fixed Sidebar */
+    flex-shrink: 0;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform var(--transition-normal);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 3rem;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 0.75rem;
+    transition: all var(--transition-fast);
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--color-primary);
+    color: white;
+}
+
+.nav-link i {
+    width: 20px;
+    text-align: center;
+}
+
+.logout-wrapper {
+    border-top: 1px solid #E5E7EB;
+    padding-top: 1rem;
+}
+
+.logout:hover {
+    background: #FEF2F2;
+    color: var(--color-danger);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    height: 100%;
+    overflow-y: auto;
+    padding: 2rem;
+    max-width: 100%;
+}
+
+/* Header */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.user-welcome h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-primary);
+}
+
+.user-welcome p {
+    color: var(--color-text-muted);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.icon-btn {
+    background: white;
+    border: 1px solid #E5E7EB;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.profile-pic img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Grid System - Fixed Overlap */
+.dashboard-grid {
+    display: grid;
+    /* Increased first column width to 440px to fit large numbers in mini-cards */
+    grid-template-columns: 440px 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    /* Increased gap */
+}
+
+/* Summary Section Wrapper */
+.summary-section {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Balance Card (Black) */
+.balance-card {
+    background: var(--color-primary);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    /* Slightly taller */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+.card-header i {
+    font-size: 2rem;
+}
+
+.balance-card h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.8;
+    font-family: monospace;
+    position: relative;
+    z-index: 2;
+}
+
+.decorative-circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    /* Softer */
+    border-radius: 50%;
+    bottom: -50px;
+    right: -50px;
+    z-index: 1;
+}
+
+/* Mini Cards - Optimized for Fit */
+.mini-cards {
+    display: flex;
+    gap: 1rem;
+    /* Slightly reduced gap */
+    margin-top: 1.5rem;
+}
+
+.mini-card {
+    flex: 1;
+    padding: 1rem;
+    /* Reduced padding */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* Reduced gap */
+    min-width: 0;
+    /* Fix flex overflow */
+}
+
+.icon-box {
+    width: 42px;
+    /* Slightly smaller */
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.icon-box.income {
+    background: #ECFDF5;
+    color: #10B981;
+}
+
+.icon-box.expense {
+    background: #FEF2F2;
+    color: #EF4444;
+}
+
+.label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 0.1rem;
+}
+
+.mini-card h3 {
+    font-size: 1.1rem;
+    /* Adjusted for fit */
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    /* Prevent wrap */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Fallback just in case, though column is wider now */
+}
+
+/* Chart Section */
+.chart-section {
+    grid-area: 1 / 2 / 2 / 3;
+    min-width: 0;
+    /* Critical for grid child internal overflow */
+}
+
+.chart-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header-clean {
+    padding: 1.5rem 1.5rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-clean h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.chart-container {
+    padding: 1rem;
+    flex: 1;
+    /* Fill remaining height */
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+}
+
+/* Bottom Row */
+.transactions-section {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.category-section {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.pie-container {
+    height: 160px;
+    /* Reduced further */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Center vertically */
+}
+
+/* Modern View All Button */
+.btn-text {
+    background: transparent;
+    border: 1px solid #E5E7EB;
+    color: var(--color-text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    /* Pill shape */
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-text:hover {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+/* Transaction List Styling */
+.transaction-list {
+    list-style: none;
+    padding: 0 1rem 1rem 1rem;
+    /* Adjust padding for scrollbar aesthetics */
+    max-height: 250px;
+    /* Fixed height for scrolling */
+    overflow-y: auto;
+    /* Enable vertical scroll */
+}
+
+/* Custom Scrollbar for Transactions */
+.transaction-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.transaction-list::-webkit-scrollbar-track {
+    background: #F3F4F6;
+    border-radius: 4px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 4px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #F3F4F6;
+    transition: background var(--transition-fast);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item:hover {
+    background: #F9FAFB;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.tx-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--color-primary);
+}
+
+.tx-details {
+    flex: 1;
+}
+
+.tx-details h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+}
+
+.tx-details span {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.tx-amount {
+    font-weight: 600;
+}
+
+.tx-amount.income {
+    color: var(--color-success);
+}
+
+.tx-amount.expense {
+    color: var(--color-text-main);
+}
+
+/* FAB Button */
+.fab-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-lg);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform var(--transition-normal);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    z-index: 1001;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+/* Radio Tiles for Type Selector */
+.type-selector {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-box {
+    flex: 1;
+    cursor: pointer;
+}
+
+.radio-box input {
+    display: none;
+}
+
+.radio-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.radio-box input:checked+.radio-tile {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+}
+
+/* --- MODERN INPUTS & FORM STYLING --- */
+/* Replacing basic input styles with modern boxes */
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Modern Input Style */
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    background: #FFFFFF;
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+/* --- MODERN CUSTOM DROPDOWN --- */
+/* Replacing basic <select> styles */
+.custom-select-container {
+    position: relative;
+    width: auto;
+    min-width: 140px;
+}
+
+.custom-select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.custom-select-trigger:hover {
+    border-color: var(--color-primary);
+    background: white;
+}
+
+.custom-select-trigger i {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    transition: transform var(--transition-fast);
+}
+
+/* Open State */
+.custom-select-container.open .custom-select-trigger {
+    border-color: var(--color-primary);
+    background: white;
+}
+
+.custom-select-container.open .custom-select-trigger i {
+    transform: rotate(180deg);
+}
+
+/* Options Dropdown */
+.custom-options {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    /* Right aligned for filters */
+    left: 0;
+    /* Or Left aligned depending on context */
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 50;
+    max-height: 250px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+    padding: 0.5rem;
+    min-width: 100%;
+}
+
+.custom-select-container.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-option {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background var(--transition-fast);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-option:hover {
+    background: #F3F4F6;
+}
+
+.custom-option.selected {
+    background: var(--color-primary);
+    color: white;
+}
+
+.custom-option.hidden {
+    display: none;
+    /* For dynamic filtering */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .summary-section,
+    .chart-section,
+    .transactions-section,
+    .category-section {
+        grid-area: auto;
+        /* Stack them */
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding-bottom: 5rem;
+        /* Space for FAB */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        height: 100vh;
+        transform: translateX(-100%);
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* --- VIEW NAVIGATION --- */
+.view-section {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.view-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- NEW COMPONENTS --- */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.wallet-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+}
+
+.bank-card {
+    background: linear-gradient(135deg, #1F2937 0%, #000 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.bank-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chip-icon {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+    border-radius: 6px;
+}
+
+.card-number {
+    font-family: monospace;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.wallet-actions {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.action-btn {
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary-light);
+    color: var(--color-text-main);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.action-btn:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.settings-group {
+    background: var(--color-surface);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.settings-group h4 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #F3F4F6;
+    color: var(--color-text-main);
+}
+
+/* Dark Mode fixes for sidebar/header if not fully using vars */
+body.dark-mode .sidebar {
+    background: var(--color-surface);
+    border-right-color: #374151;
+}
+
+body.dark-mode .nav-link {
+    color: #9CA3AF;
+}
+
+body.dark-mode .nav-link.active {
+    color: #111827;
+    /* Keep text dark on the white active pill if primary changes? */
+    background: #F3F4F6;
+}
+
+/* Wait, primary variable is inverted in main.css */
+/* Let's trust variables mostly, but Sidebar bg is hardcoded white in dashboard.css top */
+
+body.dark-mode .custom-select-trigger,
+body.dark-mode .custom-options,
+body.dark-mode .custom-option {
+    background: var(--color-surface);
+    border-color: #374151;
+    color: var(--color-text-main);
+}
+
+body.dark-mode .custom-option:hover {
+    background: #374151;
+}
+
+body.dark-mode .settings-group {
+    border: 1px solid #374151;
+}
+
+body.dark-mode .settings-group h4 {
+    border-bottom-color: #374151;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+/* Basic Toggle Switch */
+.toggle-row input {
+    display: none;
+}
+
+.slider {
+    width: 50px;
+    height: 26px;
+    background-color: #E5E7EB;
+    border-radius: 34px;
+    position: relative;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--color-primary);
+}
+
+input:checked+.slider:before {
+    transform: translateX(24px);
+}
+
+@media (max-width: 1024px) {
+
+    .analytics-grid,
+    .wallet-grid {
+        grid-template-columns: 1fr;
+    }
+}
