@@ -3,7 +3,7 @@
 **PayTe** is a modern, premium expense tracking dashboard designed to help you manage your finances with ease. This application provides real-time analytics, wallet management, and a seamless user experience with both light and dark modes.
 
 ## 🚀 Live Demo
-**[View Live Project](expense-tracker-neon-zeta-67.vercel.app)**
+##🔗:https://expense-tracker-neon-zeta-67.vercel.app
 
 ![PayTe Dashboard](https://expense-tracker-one-beryl-11.vercel.app/assets/logo.png)
 *(Note: Replace with a screenshot of the dashboard if available)*
@@ -65,4 +65,5 @@ This project is licensed under the MIT License.
 
 ---
 *Created by Vinay*
+
 
